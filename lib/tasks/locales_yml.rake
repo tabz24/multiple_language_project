@@ -42,6 +42,45 @@ namespace :config do
 
 	desc 'Read yml files and generate csv file'
 	task :generate_csv do
-
+		folders = ["Homepage", "Marketing"]
+		folders.each do |file_name|
+			file_write = File.new("#{Rails.root.to_s}/#{file_name.downcase}.csv", "w")
+			read_files = Dir["#{Rails.root.to_s}/config/locales/#{file_name}/*.yml"]
+			puts "Task Started..."
+			key = ""
+			data = []
+			new_key = true
+			header = "Category, keys"
+			read_files.each do |read_file|
+				header += ", " + read_file.split('/')[-1].split('.')[0]
+				file = File.new(read_file, "r")
+				count = 0
+				while line = file.gets
+					row = data[count]
+					row = {} if row.nil?
+					if new_key && line.split(' ').length == 1
+						key = line.split(' ')[0][0..-2]
+						new_key = false
+					elsif line.split(' ').length == 1
+						key += "." + line.split(' ')[0][0..-2]
+					else
+						row["keys"] = key + "." + line.split(' ')[0][0..-2]
+						row[read_file.split('/')[-1].split('.')[0]] = line.split(' ')[1..-1].join(' ')
+						new_key = true
+						data[count] = row
+						count += 1
+					end
+				end
+			end
+			file_write.write(header + "\n")
+			data.each do |row|
+				line = row["keys"].split('.')[0] + ", " + row["keys"]
+				read_files.each do |read_file|
+					line += ", " + row[read_file.split('/')[-1].split('.')[0]]
+				end
+				file_write.write(line + "\n")
+			end
+			file_write.close
+		end
 	end
 end
