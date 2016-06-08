@@ -1,28 +1,37 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
 
-Things you may want to cover:
+The application is contains two rake tasks
 
-* Ruby version
+* First rake task copies the spreadsheet from the google drive and updates the locales yml files
 
-* System dependencies
+* Second rake task reads the above yml file and generates the csv file
 
-* Configuration
+## Usage
 
-* Database creation
+* Update config file with proper paths and key of the translation spreadsheet
 
-* Database initialization
+* To run the first rake task, use command
+```
+rake config:generate:yml
+```
 
-* How to run the test suite
+* To run the second rake task, use command
+```
+rake config:generate:csv
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+* To run both rake tasks, use command
+```
+rake config:generate:yml_and_csv
+```
 
-* Deployment instructions
+## Contributing
 
-* ...
+1. Fork it!
+2. Create your feature branch: git checkout -b my-new-feature
+3. Commit your changes: git commit -am 'Add some feature'
+4. Push to the branch: git push origin my-new-feature
+5. Submit a pull request :D
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
