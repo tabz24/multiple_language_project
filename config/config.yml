@@ -1,0 +1,5 @@
+
+locales_dir: "config/locales/"
+translation_key: "14bEZw-t-pD7cGQ3MbTVWoFxwcuLDLINsEtGd6BIzYLc"
+client_id_path: "config/drive.json"
+folders: ["Homepage", "Marketing"]
