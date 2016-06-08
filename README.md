@@ -1,5 +1,3 @@
-== README
-
 ## About
 
 The application is contains two rake tasks
